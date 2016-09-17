@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.uem.aju.rp</groupId>
+	<artifactId>rp-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>AJU Record Persist - Parent</name>
+
+	<parent>
+		<groupId>es.uem.aju</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../../parent/pom.xml</relativePath>
+	</parent>
+
+    <modules>		
+		<!-- COMMON- UTILS -->				
+		<module>../../../common/common-util</module>
+		<module>../../../common/common-dto</module>
+		<module>../../../common/common-dao-interface</module>
+		<module>../../../common/common-dao</module>
+		
+		<!-- EJB Bussines -->
+		<module>../rp-business-interface</module>
+		<module>../rp-business</module>
+				
+		<!-- Web -->		
+		<module>../rp-web</module>
+						
+		<!-- EAR -->
+    	<module>../rp-ear</module>
+    		
+	</modules>
+	
+</project>

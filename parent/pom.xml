@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.uem.aju</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Arquitectura J2EE UEM:AJU</name>
+
+	<properties>
+		<!-- Build properties -->
+		<jdk.version>1.8</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<ejbVersion.version>3.1</ejbVersion.version>		
+		<!-- Dependencies versions -->		
+		<activemq-all.version>5.10.1</activemq-all.version>	
+		<!-- Maven plugin versions -->
+		<maven-clean-plugin.version>2.6.1</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+		<maven-ear-plugin.version>2.10</maven-ear-plugin.version>
+		<maven-ejb-plugin.version>2.5</maven-ejb-plugin.version>
+		<maven-jar-plugin.version>2.5</maven-jar-plugin.version>
+		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
+		<maven-war-plugin.version>2.6</maven-war-plugin.version>
+		<maven-jaxb22-plugin.version>0.12.3</maven-jaxb22-plugin.version>
+	</properties>
+	<modules>		
+		<!-- AJU Modules 	-->
+		<module>../modules/RP/rp-parent</module>
+		<module>../modules/CUSTOMER/customer-parent</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven-clean-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${maven-ear-plugin.version}</version>
+					<configuration>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+						<fileNameMapping>no-version</fileNameMapping>
+						<skinnyWars>true</skinnyWars>						
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${maven-ejb-plugin.version}</version>
+					<configuration>
+						<ejbVersion>${ejbVersion.version}</ejbVersion>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven-war-plugin.version}</version>
+					<configuration>
+						<filters>
+							<filter>${project.basedir}/filters/filter-${environment}.properties</filter>
+						</filters>
+						<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<webResources>
+							<resource>
+								<filtering>true</filtering>
+								<directory>src/main/webapp/WEB-INF</directory>
+								<includes>
+									<include>web.xml</include>
+								</includes>
+								<targetPath>WEB-INF</targetPath>
+							</resource>
+						</webResources>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb22-plugin</artifactId>
+					<version>${maven-jaxb22-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<configuration>
+					<ejbVersion>${ejbVersion.version}</ejbVersion>					
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>jvnet-nexus-releases</id>
+			<name>jvnet-nexus-releases</name>
+			<url>https://maven.java.net/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>jboss</id>
+			<name>jboss</name>
+			<url>http://repository.jboss.org</url>
+		</repository>				
+	</repositories>
+	
+	<profiles>
+		<!-- Development -->
+		<profile>
+			<id>develop</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<environment>develop</environment>
+				<plugin-jar>${java.home}/lib/plugin.jar</plugin-jar>
+				<server>jboss</server>
+			</properties>
+		</profile>
+		<!--// Development -->
+		<!-- Testing -->
+		<profile>
+			<id>test</id>
+			<properties>
+				<environment>test</environment>
+				<plugin-jar>${java.home}/lib/plugin.jar</plugin-jar>
+				<server>jboss</server>
+			</properties>
+		</profile>
+		<!--// Testing -->
+	</profiles>
+
+</project>

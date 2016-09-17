@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="true">
+
+	<appender name="GENERAL" class="org.apache.log4j.RollingFileAppender">
+		<param name="Append" value="true" />		
+		<param name="File" value="logs/common-dao.log" />
+		<param name="maxBackupIndex" value="10" />
+		<param name="maxFileSize" value="10MB" />
+		<param name="Threshold" value="TRACE" />		
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy/MM/dd HH:mm:ss,SSS} %-5p &lt;%t&gt;[%c{2}] %m%n" />
+		</layout>
+	</appender>
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <param name="threshold" value="INFO" />
+        <param name="target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout" />        
+    </appender>			
+
+	<root>
+		<level value="TRACE" />				
+		<appender-ref ref="GENERAL" />
+		 <appender-ref ref="stdout" />
+	</root>
+</log4j:configuration>

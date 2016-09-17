@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.uem.aju.rp</groupId>
+	<artifactId>rp</artifactId>
+	<packaging>ear</packaging>
+	<name>AJU Record Persist - EAR</name>
+
+	<parent>
+		<groupId>es.uem.aju.rp</groupId>
+		<artifactId>rp-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../rp-parent/pom.xml</relativePath>
+	</parent>
+
+	<dependencies>
+	
+		<!-- Common libs -->	
+		<dependency>
+			<groupId>es.uem.aju.common</groupId>
+			<artifactId>common-util</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+	
+		<dependency>
+			<groupId>es.uem.aju.common</groupId>
+  			<artifactId>common-dto</artifactId>		
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>es.uem.aju.common</groupId>
+			<artifactId>common-dao-interface</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+			
+		<dependency>
+			<groupId>es.uem.aju.common</groupId>
+  			<artifactId>common-dao</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+				
+		<!-- AJU  Modules -->
+		<dependency>
+			<groupId>es.uem.aju.rp.business</groupId>
+			<artifactId>rp-business</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ejb</type>			
+		</dependency>
+		
+		<dependency>
+			<groupId>es.uem.aju.rp.web</groupId>
+			<artifactId>rp-web</artifactId>
+			 <version>1.0-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>		
+
+	</dependencies>
+
+	<build>
+		<finalName>recordpersist</finalName>
+	</build>
+
+</project>
